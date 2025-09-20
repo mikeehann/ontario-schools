@@ -44,4 +44,34 @@ document.addEventListener('DOMContentLoaded', function () {
             }).addTo(map);
         })
         .catch(error => console.error('Error loading GeooJSON data', error));
+
+
+        // Legend
+        const legend = L.control({position: "bottomright"});
+
+        legend.onAdd = function (map) { 
+            const div = L.DomUtil.create("div", "info legend");
+            const grades = [0, 20, 40, 60, 80];
+    
+            div.innerHTML += '<h4>Math Proficiency (% at L3/4)</h4>';
+    
+            for (let i = 0; i < grades.length; i++) {
+                const fromGrade = grades[i];
+                const toGrade = grades[i + 1];
+                
+                const gradeColour = colourScale(fromGrade + 1).hex();
+    
+                const legendBack = '<i style="background:' + gradeColour + '"></i> ' + fromGrade + (toGrade ? '&ndash;' + toGrade + '%' : '+%') + '<br>';
+                console.log(legendBack)
+
+                div.innerHTML += legendBack
+                    
+            }
+            div.innerHTML += '<i style="background:#808080"></i> No Data';
+    
+            return div;
+        };
+
+        legend.addTo(map)
+
 });

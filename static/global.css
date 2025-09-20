@@ -21,3 +21,10 @@ body {
     width: 100%;
     border-radius: 0.75rem;
 }
+
+.legend i {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
