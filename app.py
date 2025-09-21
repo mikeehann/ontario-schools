@@ -3,7 +3,7 @@ import json
 
 app = Flask(__name__)
 
-with open('data/ontario_schools.geojson', 'r') as f:
+with open('static/ontario_schools.geojson', 'r') as f:
     school_data = json.load(f)
 
 @app.route('/')
