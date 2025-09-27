@@ -1,2 +1,11 @@
 static/ontario_schools.geojson
 venv/
+
+
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform*
+crash.log
+deployment_package.zip
