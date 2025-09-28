@@ -59,3 +59,15 @@ resource "aws_s3_bucket_public_access_block" "private_bucket_pab" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+resource "aws_s3_bucket_cors_configuration" "private_data_bucket_cors" {
+  bucket = aws_s3_bucket.private_data_bucket.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD"]
+    allowed_origins = ["https://${var.subdomain_name}.${var.domain_name}"]
+    expose_headers  = []
+    max_age_seconds = 3000
+  }
+}

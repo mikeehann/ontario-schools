@@ -6,6 +6,7 @@ venv/
 *.tfstate
 *.tfstate.backup
 *.tfvars
+*.tfplan
 .terraform*
 crash.log
 deployment_package.zip

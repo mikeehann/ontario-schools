@@ -24,7 +24,7 @@ aws s3 sync dist/ "s3://${PUBLIC_BUCKET_NAME}" --delete
 
 # --- 3. Upload Private Data File ---
 echo "⬆️  Uploading private data file to s3://${PRIVATE_BUCKET_NAME}..."
-aws s3 cp static/ontario_schools.geojson "s3://${PRIVATE_BUCKET_NAME}/ontario_schools.geojson"
+#aws s3 cp static/ontario_schools.geojson "s3://${PRIVATE_BUCKET_NAME}/ontario_schools.geojson"
 
 
 # --- 4. Invalidate CloudFront Cache ---

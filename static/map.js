@@ -87,17 +87,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     fetch(window.config.apiEndpoint)
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`API Gateway request failed with status ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
+        // Use the pre-signed URL from the response to fetch the actual GeoJSON file
+        const geojsonUrl = data.url;
+        return fetch(geojsonUrl);
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`S3 download failed with status ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Actual GeoJSON
         schoolData = data;
-            
         populateDropdown(data.features);
-
-        // Get the first option from the populated dropdown to set the initial map style
         const initialAttribute = document.getElementById('attribute-select').value;
         updateMapStyle(initialAttribute);
     })
-    .catch(error => console.error('Error loading GeooJSON data', error));
+    .catch(error => {
+        console.error('Error loading or processing GeoJSON data:', error);
+    });
 
     // Legend
     const legend = L.control({position: "topright"});

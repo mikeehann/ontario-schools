@@ -5,6 +5,8 @@ resource "aws_lambda_function" "get_school_data" {
   runtime       = "python3.12"
   filename      = "deployment_package.zip"
   source_code_hash = filebase64sha256("deployment_package.zip")
+  timeout     = 90
+  memory_size = 512
 
   environment {
     variables = {
